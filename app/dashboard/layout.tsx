@@ -3,21 +3,32 @@
 import Sidebar from "@/components/DashboardComponents/Sidebar";
 import Topbar from "@/components/DashboardComponents/Topbar";
 
-
-
-
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex bg-gray-100 min-h-screen">
-      <Sidebar />
+    <div className="bg-black min-h-screen text-white">
 
-      <div className="flex-1">
-        <Topbar />
-        <div className="p-6">{children}</div>
+      {/* --- Fixed Sidebar --- */}
+      <aside className="fixed top-0 left-0 h-full w-64 bg-zinc-900 border-r border-white/10">
+        <Sidebar />
+      </aside>
+
+      {/* --- Main Section --- */}
+      <div className="ml-64 min-h-screen">
+
+        {/* Sticky Topbar */}
+        <div className="sticky top-0 z-40">
+          <Topbar />
+        </div>
+
+        {/* Page Content */}
+        <div className="p-6">
+          {children}
+        </div>
+
       </div>
     </div>
   );
