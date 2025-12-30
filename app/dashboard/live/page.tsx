@@ -35,7 +35,7 @@ export default function LivePage() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow space-y-6">
+    <div className="bg-green/30 p-6 rounded-xl shadow space-y-6">
       <h1 className="text-2xl font-bold">Go Live</h1>
 
       {/* Select Video */}

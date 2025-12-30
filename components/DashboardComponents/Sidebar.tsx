@@ -8,17 +8,17 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const linkClass = (path: string) =>
-    `block px-3 py-2 rounded transition ${
+    `block px-3 py-2 rounded-full transition ${
       pathname === path
         ? "bg-red-600 text-white"
         : "text-gray-400 hover:text-white hover:bg-gray-800"
     }`;
 
   return (
-    <aside className="w-64 min-h-screen bg-black text-white p-6 flex flex-col justify-between">
+    <aside className="w-64 min-h-screen bg-black/10 text-white p-6 flex flex-col justify-between  border-r border-black-10 rounded-r-4xl ">
       {/* --------- Top Section --------- */}
       <div>
-        <h1 className="text-2xl font-bold mb-8">StreamX</h1>
+        <h1 className="text-4xl font-bold mb-8 mt-4 px-8">StreamX</h1>
 
         <nav className="space-y-2">
           <Link href="/dashboard" className={linkClass("/dashboard")}>
@@ -34,7 +34,7 @@ export default function Sidebar() {
           </Link>
 
           <Link href="/dashboard/live" className={linkClass("/dashboard/live")}>
-            Live Streams
+            Go Live
           </Link>
 
           <Link href="/dashboard/analytic" className={linkClass("/dashboard/analytic")}>
@@ -51,7 +51,7 @@ export default function Sidebar() {
       <div className="border-t border-gray-800 pt-4">
         <Link
           href="/auth/login"  // <-- yaha ap apni logout / login route set karo
-          className="block bg-red-600 hover:bg-red-700 text-center py-2 rounded font-semibold"
+          className="block bg-red-600 hover:bg-red-700 text-center py-2 rounded-full font-semibold"
         >
           Logout
         </Link>

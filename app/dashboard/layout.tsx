@@ -12,7 +12,7 @@ export default function DashboardLayout({
     <div className="bg-black min-h-screen text-white">
 
       {/* --- Fixed Sidebar --- */}
-      <aside className="fixed top-0 left-0 h-full w-64 bg-zinc-900 border-r border-white/10">
+      <aside className="fixed top-0 left-0 h-full w-64 bg-zinc-900 border-r border-white/10 rounded-r-4xl">
         <Sidebar />
       </aside>
 

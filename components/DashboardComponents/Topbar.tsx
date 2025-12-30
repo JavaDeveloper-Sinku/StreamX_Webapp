@@ -3,14 +3,50 @@
 import { Bell, Search, Menu, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const pageMeta: Record<
+  string,
+  { title: string; subtitle: string }
+> = {
+  "/dashboard": {
+    title: "Dashboard",
+    subtitle: "Manage your content smartly",
+  },
+  "/dashboard/upload": {
+    title: "Upload",
+    subtitle: "Upload your videos and media",
+  },
+  "/dashboard/videos": {
+    title: "Videos",
+    subtitle: "Manage your uploaded videos",
+  },
+  "/dashboard/live": {
+    title: "Go Live",
+    subtitle: "Manage your live streaming sessions",
+  },
+   "/dashboard/analytic": {
+    title: "Analytics",
+    subtitle: "View your performance metrics",
+  },
+   "/dashboard/setting": {
+    title: "Settings",
+    subtitle: "Control application preferences",
+  },
+};
 
 export default function Topbar() {
   const [showSearch, setShowSearch] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const pathname = usePathname();
+
+  const currentPage =
+    pageMeta[pathname] ??
+    pageMeta["/dashboard"];
 
   return (
-    <header className="w-full sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-black/70 border-b border-gray-200 dark:border-white/10">
-      <div className="flex items-center justify-between px-6 py-4">
+    <header className=" w-full sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-black/10 border-b border-gray-200 dark:border-white/10 rounded-b-4xl ">
+      <div className=" flex items-center justify-between px-6 py-4">
 
         {/* Left Section */}
         <div className="flex items-center gap-4">
@@ -20,10 +56,10 @@ export default function Topbar() {
 
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-              Dashboard
+              {currentPage.title}
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Manage your content smartly 🚀
+              {currentPage.subtitle}
             </p>
           </div>
         </div>
@@ -36,7 +72,7 @@ export default function Topbar() {
             <Search size={18} className="text-gray-500 dark:text-gray-300" />
             <input
               type="text"
-              placeholder="Search videos, analytics..."
+              placeholder="Search..."
               className="bg-transparent outline-none text-sm text-gray-700 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400"
             />
           </div>
@@ -52,7 +88,7 @@ export default function Topbar() {
           {/* Notification */}
           <button className="relative p-2 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition">
             <Bell size={18} className="text-gray-700 dark:text-gray-200" />
-            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 border border-white dark:border-black rounded-full"></span>
+            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 border border-white dark:border-black rounded-full" />
           </button>
 
           {/* Avatar + Dropdown */}
@@ -65,28 +101,25 @@ export default function Topbar() {
               <ChevronDown size={18} className="text-gray-700 dark:text-gray-200" />
             </button>
 
-            {/* Dropdown Menu */}
             {showProfileMenu && (
               <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-black/80 border border-gray-200 dark:border-white/10 rounded-lg shadow-lg py-2 z-50">
                 <Link
                   href="/dashboard/profile"
-                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 transition"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10"
                   onClick={() => setShowProfileMenu(false)}
                 >
                   Profile
                 </Link>
-
                 <Link
                   href="/dashboard/setting"
-                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 transition"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10"
                   onClick={() => setShowProfileMenu(false)}
                 >
                   Settings
                 </Link>
-
                 <Link
                   href="/dashboard/plans"
-                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 transition"
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/10"
                   onClick={() => setShowProfileMenu(false)}
                 >
                   Plans
@@ -97,7 +130,7 @@ export default function Topbar() {
         </div>
       </div>
 
-      {/* Mobile Search Bar */}
+      {/* Mobile Search */}
       {showSearch && (
         <div className="px-4 pb-3 md:hidden">
           <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-white/10 rounded-xl border border-gray-200 dark:border-white/10">
