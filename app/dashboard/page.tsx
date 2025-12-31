@@ -11,7 +11,7 @@ export default function DashboardPage() {
         <StatsCard title="Total Views" value="120K" />
         <StatsCard title="Videos" value="34" />
         <StatsCard title="Live" value="2" />
-        <StatsCard title="Subscribers" value="8.2K" />
+        <StatsCard title="Space" value="8.2K" />
       </div>
 
       <VideoTable />

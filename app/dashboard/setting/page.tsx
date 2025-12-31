@@ -2,7 +2,7 @@
 
 export default function SettingsPage() {
   return (
-    <div className="min-h-screen bg-gray-900 flex justify-center px-4 py-10">
+    <div className="w-full bg-gray-900 flex justify-center px-4 py-10">
       {/* Main Container */}
       <div className="w-full max-w-5xl bg-gray-800 rounded-xl shadow-lg overflow-hidden">
         

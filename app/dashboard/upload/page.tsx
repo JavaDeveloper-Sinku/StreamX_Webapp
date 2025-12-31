@@ -32,10 +32,10 @@ export default function UploadVideo() {
   };
 
   return (
-    <div className="min-h-screen bg-black p-6">
+    <div className="w-full bg-black/40 p-8 border rounded-xl border-white/10">
 
       {/* ---- Modern Upload Section ---- */}
-      <div className="max-w-3xl mx-auto bg-gradient-to-b from-zinc-900 to-black border border-white/10 rounded-2xl p-4 shadow-xl">
+      <div className="max-w-3xl mx-auto bg-gradient-to-b from-zinc-900 to-black border border-white/10 rounded-2xl p-8 mt-6 shadow-xl">
 
         <h1 className="text-3xl font-bold text-white">
           Upload Your Content 🎬

@@ -22,17 +22,53 @@ const videos = [
     uploadedAt: "2025-12-26 20:15",
     status: "UPLOADING",
   },
+    {
+    id: 3,
+    title: "Live Stream Setup",
+    duration: "15:20",
+    uploadedAt: "2025-12-26 20:15",
+    status: "UPLOADING",
+  },
+    {
+    id: 3,
+    title: "Live Stream Setup",
+    duration: "15:20",
+    uploadedAt: "2025-12-26 20:15",
+    status: "UPLOADING",
+  },
+    {
+    id: 3,
+    title: "Live Stream Setup",
+    duration: "15:20",
+    uploadedAt: "2025-12-26 20:15",
+    status: "UPLOADING",
+  },
+    {
+    id: 3,
+    title: "Live Stream Setup",
+    duration: "15:20",
+    uploadedAt: "2025-12-26 20:15",
+    status: "UPLOADING",
+  },
+    {
+    id: 3,
+    title: "Live Stream Setup",
+    duration: "15:20",
+    uploadedAt: "2025-12-26 20:15",
+    status: "UPLOADING",
+  },
+
 ];
 
 export default function VideosPage() {
   return (
-    <div className="min-h-screen bg-black p-6">
+    <div className="w-full bg-black/40 border rounded-xl border-white/10 p-6">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white">Your Videos 📺</h1>
+            <h1 className="text-3xl font-bold text-white">Your Videos </h1>
             <p className="text-gray-400 text-sm mt-1">
               Manage uploaded content, check processing status and actions
             </p>

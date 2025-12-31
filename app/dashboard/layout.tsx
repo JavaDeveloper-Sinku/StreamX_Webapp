@@ -9,10 +9,10 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-black min-h-screen text-white">
+    <div className="bg-black/80 min-h-screen text-white">
 
       {/* --- Fixed Sidebar --- */}
-      <aside className="fixed top-0 left-0 h-full w-64 bg-zinc-900 border-r border-white/10 rounded-r-4xl">
+      <aside className="fixed top-0 left-0 h-full w-64 bg-zinc-900 border-r border-white/20 rounded-r-4xl">
         <Sidebar />
       </aside>
 
