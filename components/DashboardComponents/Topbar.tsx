@@ -67,23 +67,7 @@ export default function Topbar() {
         {/* Right Section */}
         <div className="flex items-center gap-4">
 
-          {/* Search Desktop */}
-          <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-white/10 rounded-full border border-gray-200 dark:border-white/10">
-            <Search size={18} className="text-gray-500 dark:text-gray-300" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="bg-transparent outline-none text-sm text-gray-700 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400"
-            />
-          </div>
-
-          {/* Search Mobile Button */}
-          <button
-            onClick={() => setShowSearch(!showSearch)}
-            className="md:hidden p-2 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition"
-          >
-            <Search size={18} className="text-gray-700 dark:text-gray-200" />
-          </button>
+         
 
           {/* Notification */}
           <button className="relative p-2 rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition">
