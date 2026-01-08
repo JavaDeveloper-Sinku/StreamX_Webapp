@@ -1,81 +1,61 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function UploadVideo() {
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
-  const [userId, setUserId] = useState<string | null>(null);
+  
 
-  // Fetch current logged-in user from localStorage
-  useEffect(() => {
-    const currentUserId = localStorage.getItem("currentUserId"); // store at login
-    setUserId(currentUserId);
-  }, []);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const handleUpload = async () => {
-    if (!file) return;
-    if (!userId) {
-      alert("Please login first!");
-      return;
+  if (!file) return;
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Please login first!");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "http://localhost:8080/api/videos/upload");
+
+  xhr.setRequestHeader("Authorization", `Bearer ${token}`);
+
+  xhr.upload.onprogress = (e) => {
+    if (e.lengthComputable) {
+      setProgress(Math.round((e.loaded / e.total) * 100));
     }
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("userId", userId); // basic auth mapping
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/api/videos/upload");
-
-    xhr.upload.onprogress = (event) => {
-      if (event.lengthComputable) {
-        const percent = Math.round((event.loaded / event.total) * 100);
-        setProgress(percent);
-      }
-    };
-
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        setMessage(xhr.responseText); // backend response: URL / message
-      } else {
-        setMessage("Upload failed ❌");
-      }
-      setProgress(0);
-      setFile(null);
-    };
-
-    xhr.onerror = () => {
-      setMessage("Network error ❌");
-      setProgress(0);
-    };
-
-    xhr.send(formData);
   };
+
+  xhr.onload = () => {
+    setMessage(xhr.status === 200 ? "Upload success ✅" : "Upload failed ❌");
+    console.log("STATUS:", xhr.status);
+    setProgress(0);
+  };
+
+  xhr.onerror = () => setMessage("Network error ❌");
+
+  xhr.send(formData);
+};
 
   return (
     <div className="w-full bg-black/40 p-8 border rounded-xl border-white/10">
-      <div className="max-w-3xl mx-auto bg-gradient-to-b from-zinc-900 to-black border border-white/10 rounded-2xl p-8 mt-6 shadow-xl">
+      <div className="max-w-3xl mx-auto bg-zinc-900 border border-white/10 rounded-2xl p-8 mt-6 shadow-xl">
+
         <h1 className="text-3xl font-bold text-white">
           Upload Your Content 🎬
         </h1>
-        <p className="text-gray-400 mt-2">
-          High-quality streaming upload • Fast & Secure
-        </p>
 
-        <div className="mt-8 bg-zinc-800/40 border border-white/10 rounded-xl p-8 flex flex-col items-center justify-center backdrop-blur-sm">
-          <div className="w-16 h-16 bg-red-600/20 text-red-500 flex items-center justify-center rounded-full text-3xl">
-            ⬆
-          </div>
-          <h2 className="text-white text-xl font-semibold mt-4">
-            Select your video to upload
-          </h2>
-          <p className="text-gray-400 text-sm mt-2">
-            MP4 • MKV • MOV — Max Size 4GB
-          </p>
+        <div className="mt-8 bg-zinc-800/40 border border-white/10 rounded-xl p-8 flex flex-col items-center">
 
-          <label className="mt-6">
-            <span className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg text-white cursor-pointer font-semibold transition">
+          <label className="cursor-pointer">
+            <span className="bg-red-600 px-6 py-3 rounded-lg text-white">
               Choose Video
             </span>
             <input
@@ -87,32 +67,29 @@ export default function UploadVideo() {
           </label>
 
           {file && (
-            <p className="mt-4 text-gray-300 text-sm">
+            <p className="mt-4 text-gray-300">
               Selected: <span className="text-red-400">{file.name}</span>
             </p>
           )}
         </div>
 
-        {/* Progress */}
         {progress > 0 && (
-          <div className="w-full bg-gray-700 rounded-full h-3 mt-6 overflow-hidden">
+          <div className="w-full bg-gray-700 rounded-full h-3 mt-6">
             <div
-              className="bg-red-600 h-3 rounded-full transition-all duration-300"
+              className="bg-red-600 h-3 rounded-full"
               style={{ width: `${progress}%` }}
             />
           </div>
         )}
 
-        {/* Upload Button */}
         <button
           onClick={handleUpload}
           disabled={!file}
-          className="mt-6 w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white py-3 rounded-lg font-semibold transition"
+          className="mt-6 w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-700 text-white py-3 rounded-lg"
         >
           {progress > 0 ? `Uploading... ${progress}%` : "Upload Now"}
         </button>
 
-        {/* Message */}
         {message && <p className="mt-4 text-gray-300">{message}</p>}
       </div>
     </div>
